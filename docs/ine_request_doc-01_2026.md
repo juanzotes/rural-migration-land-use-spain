@@ -34,16 +34,19 @@ Municipal-level socioeconomic and agricultural data for territorial and demograp
 - Retirement rate (per 1,000 inhabitants)
 
 ### 3. Service Accessibility
-**INE Response:** Data not available - referred to MITERD
+**INE Response:** Data not available
 
-| Variable | INE Status |
-|----------|-----------|
-| Time to highway/motorway | ❌ Not available |
-| Time to hospital | ❌ Not available |
-| Number of pharmacies | ❌ Not available |
-| Number of primary schools | ❌ Not available |
-| Internet coverage ≥30 Mbps | ❌ Not available |
-| Internet coverage ≥100 Mbps | ❌ Not available |
+| Variable | INE Status | Alternative Source |
+|----------|-----------|-------------------|
+| Time to highway/motorway | ❌ Not available | [MITMA](https://www.mitma.gob.es/) - Road network + isochrone analysis |
+| Time to hospital | ❌ Not available | [Ministry of Health](https://www.sanidad.gob.es/) / OpenStreetMap |
+| Number of pharmacies | ❌ Not available | [General Council of Pharmaceutical Colleges](https://www.portalfarma.com/) |
+| Number of primary schools | ❌ Not available | [Ministry of Education](https://www.educacion.gob.es/) |
+| Internet coverage ≥30 Mbps | ❌ Not available | [Ministry of Digital Transformation](https://avancedigital.mineco.gob.es/banda-ancha/cobertura/Paginas/informes-cobertura.aspx) |
+| Internet coverage ≥100 Mbps | ❌ Not available | [Ministry of Digital Transformation](https://avancedigital.mineco.gob.es/banda-ancha/cobertura/Paginas/informes-cobertura.aspx) |
+
+**Follow-up:** Will request data from indicated sources. OpenStreetMap (OSM) as fallback for spatial data.
+
 
 **Follow-up:** Awaiting official INE response to determine correct ministry contacts before submitting new requests.
 
@@ -102,7 +105,7 @@ If official sources unavailable after clarification:
 
 **Requestor:** Juan Zotes  
 **Institution:** Universidad Complutense de Madrid  
-**Email:** juanzotes@gmail.com  
+**Email:** jzotes01@ucm.es / juanzotes@gmail.com  
 **Project:** RurIm Escape - Neo-rural migration and land use change analysis
 
 ---
