@@ -35,13 +35,19 @@ Zoom into recent years to detect neo-rural migration signals potentially linked 
 ## ✅ Completed Work
 **1. Historical Census Data Cleaning**
 **Source:** INE ([Instituto Nacional de Estadística](https://www.ine.es/)) - Padrón Municipal
+
 Coverage: 8,131 municipalities × 28 years (1996–2024, excluding 1997)
+
 Output: 01_padron_clean_1996_2024.csv
+
 Key Processing Steps:
 
 Standardization of INE CSV format (semicolon-separated, Latin-1 encoding)
+
 Municipality code extraction with leading zero preservation
+
 Removal of invalid census year (1997)
+
 Handling of 1,860 missing value cases (documented)
 
 Notebook: 01_data_cleaning_padron_historico.ipynb
