@@ -37,20 +37,15 @@ Zoom into recent years to detect neo-rural migration signals potentially linked 
 **Source:** INE ([Instituto Nacional de Estadística](https://www.ine.es/)) - Padrón Municipal
 
 Coverage: 8,131 municipalities × 28 years (1996–2024, excluding 1997)
-
 Output: 01_padron_clean_1996_2024.csv
 
-Key Processing Steps:
-
+**Key Processing Steps:**
 Standardization of INE CSV format (semicolon-separated, Latin-1 encoding)
-
 Municipality code extraction with leading zero preservation
-
 Removal of invalid census year (1997)
-
 Handling of 1,860 missing value cases (documented)
-
 Notebook: 01_data_cleaning_padron_historico.ipynb
+
 
 **2. Multi-interval Population Variation Analysis**
 Methodology: Computed percentage population change for all interval lengths (k=1 to k=28 years)
