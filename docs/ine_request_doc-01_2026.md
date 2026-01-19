@@ -1,7 +1,7 @@
 # Data Request to INE (Instituto Nacional de Estadística)
 
 ## Status
-- **Submitted:** January 2025
+- **Submitted:** January 2026
 - **Current Status:** ⏳ Awaiting response
 - **Reference:** Request IDs 234405 → 234397, 234398, 234399, 234400
 - **Institution:** Universidad Complutense de Madrid
@@ -93,9 +93,9 @@ If official sources unavailable after clarification:
 - `05_multivariate_analysis.ipynb`
 
 **Timeline:**
-- **Feb 2025:** INE data delivery
-- **Mar 2025:** Data cleaning & integration
-- **Apr 2025:** Multivariate analysis complete
+- **Feb 2026:** INE data delivery
+- **Mar 2026:** Data cleaning & integration
+- **Apr 2026:** Multivariate analysis complete
 
 ---
 
