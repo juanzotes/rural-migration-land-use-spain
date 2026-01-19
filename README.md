@@ -4,7 +4,7 @@
 
 ⚠️  **Project Status:** Core demographic analysis complete. Integration of socioeconomic, service accessibility, and agricultural variables in progress. Land cover analysis awaiting Corine 2024 release.
 
-##📋 Project Overview
+## 📋 Project Overview
 RurIm Escape investigates demographic shifts in Spanish rural municipalities and their potential relationship with land use changes. This repository contains the demographic analysis pipeline for a larger research project examining neo-rural migration patterns accelerated by remote work adoption post-COVID-19.
 
 **Research Design: Two-Scale Temporal Analysis**
@@ -21,8 +21,15 @@ Zoom into recent years to detect neo-rural migration signals potentially linked 
 5. [Future] Can land use changes (2018–2024) be detected and linked to these multivariate socioeconomic patterns?
 
 
-🛠️ Technical Stack
-CategoryTools & LibrariesData ProcessingPandas, NumPyGeospatial AnalysisGeoPandas, ShapelyVisualizationMatplotlib, Seaborn, Folium (planned)DatabasePostgreSQL/PostGIS (planned)WorkflowJupyter Lab, Git/GitHub
+### 🛠️ Technical Stack
+| Category | Tools & Libraries |
+|----------|------------------|
+| **Data Processing** | Pandas, NumPy |
+| **Geospatial Analysis** | GeoPandas, Shapely, QGIS (PyQGIS) |
+| **Visualization** | Matplotlib, Seaborn, Folium, Plotly *(interactive maps - local development)* |
+| **Database** | PostgreSQL/PostGIS *(planned)* |
+| **Workflow** | Jupyter Lab, Conda environments, Git/GitHub |
+
 
 ✅ Completed Work
 1. Historical Census Data Cleaning
