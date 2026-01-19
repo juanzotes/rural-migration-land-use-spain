@@ -46,7 +46,7 @@ Zoom into recent years to detect neo-rural migration signals potentially linked 
 ## ✅ Completed Work
 
 ### 1. Historical Census Data Cleaning
-**Source:** INE (Instituto Nacional de Estadística) - Padrón Municipal  
+**Source:** INE ([Instituto Nacional de Estadística](https://www.ine.es/)) - Padrón Municipal  
 **Coverage:** 8,131 municipalities × 28 years (1996–2024, excluding 1997)  
 **Output:** [`01_padron_clean_1996_2024.csv`](data/processed/)
 
@@ -269,10 +269,10 @@ This research framework can inform:
 GIS Research Analyst | Environmental Scientist  
 Complutense University of Madrid
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://linkedin.com/in/juanzotes)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/juan-zotes-orcajo-88a0a51aa/)
 [![Email](https://img.shields.io/badge/Email-Contact-red)](mailto:juanzotes@gmail.com)
 
-*Specializing in geospatial analysis, ecosystem restoration, and landscape ecology. Open to opportunities in biodiversity analytics, climate tech, and sustainable finance.*
+*Specializing in geospatial analysis, ecosystem restoration, landscape ecology and biodiversity. Open to opportunities in biodiversity analytics, climate tech, and sustainable finance.*
 
 ---
 
@@ -284,9 +284,11 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
+- Cristina Herrero Jáuregui
+- **Research Group:** [ADAPTA (Socio-Ecological Systems, Landscape and Rural Development)](https://www.ucm.es/ecologia/sistemas-socioecologicos,-paisaje-y-desarrollo-local) 
 - **Universidad Complutense de Madrid** - Research support
 - **Instituto Nacional de Estadística (INE)** - Historical census data
-- **University of Helsinki** - Geo-Python & AutoGIS training
+- **University of Helsinki** - Geo-Python &Cristina Herrero Jaúregui
 
 ---
 
