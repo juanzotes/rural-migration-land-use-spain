@@ -48,8 +48,6 @@ Municipal-level socioeconomic and agricultural data for territorial and demograp
 **Follow-up:** Will request data from indicated sources. OpenStreetMap (OSM) as fallback for spatial data.
 
 
-**Follow-up:** Awaiting official INE response to determine correct ministry contacts before submitting new requests.
-
 ### 4. Agricultural & Livestock Data
 - Number of agricultural operations (temporal evolution)
 - Number of livestock operations (temporal evolution)
