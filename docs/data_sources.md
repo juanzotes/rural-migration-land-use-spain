@@ -54,7 +54,7 @@ Comprehensive listing of all datasets used or planned for the RurIm Escape proje
 **Categories:**
 - Demographic (age structure, foreign population)
 - Economic (income, employment, unemployment)
-- Service accessibility (hospitals, schools, internet)
+- Service accessibility (hospitals, schools, internet) --> Other sources: see [`data_request_ine.md`](data_request_ine.md)
 - Agricultural (farm counts, SAU, livestock, tenure)
 
 **Planned Integration:** March 2025 (see notebook `04_ine_data_integration.ipynb` - WIP)
@@ -152,8 +152,9 @@ graph LR
     E --> F[Spatial Density Metrics]
     B --> G[Identify Growth Hotspots]
     D --> G
+    N[Agricultural & Service Data] --> D
     G --> H[Focal Municipalities 2018-2024]
-    I[Corine 2024] --> J[Land Cover Change]
+    I[CORINE] --> J[Land Cover Change]
     K[Sentinel-2] --> L[Remote Sensing Validation]
     H --> J
     H --> L
