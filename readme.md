@@ -231,7 +231,7 @@ See `docs/data_sources.md` for detailed download instructions and expected local
 ## 📈 Preliminary Insights
 
 ### Macro-temporal Trends (1996–2024)
-- **Total municipalities analyzed:** 8,131
+- **Total municipalities analyzed:** 8,220
 - **Data completeness:** 99.7% (1,860 missing values documented)
 - **Temporal span:** 28 years (longest historical census series in Spain)
 
