@@ -501,7 +501,7 @@ GIS Research Analyst | Geographer & Environmental Scientist
 Complutense University of Madrid
 
 📧 **Contact:** [jzotes01@ucm.es](mailto:jzotes01@ucm.es) | [juanzotes@gmail.com](mailto:juanzotes@gmail.com)  
-🔗 **LinkedIn:** [linkedin.com/in/juan-zotes](https://www.linkedin.com/in/juan-zotes)
+🔗 **LinkedIn:** [https://www.linkedin.com/in/juan-zotes-orcajo-88a0a51aa/](https://www.linkedin.com/in/juan-zotes-orcajo-88a0a51aa/)
 
 *Specializing in geospatial analysis, ecosystem restoration, landscape ecology, and biodiversity analytics. Interested in climate tech and sustainable rural development.*
 
