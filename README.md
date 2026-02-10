@@ -49,6 +49,7 @@ graph LR
     C["INE Socioeconomic<br/>(Pending)"] --> D["Multivariate<br/>Analysis"]
     E["Municipal Boundaries<br/>(IGN)"] --> B
     E --> F["Spatial Density<br/>Metrics"]
+    A --> F
     B --> G["Identify Growth<br/>Hotspots"]
     D --> G
     N["Agricultural &<br/>Service Data"] --> D
@@ -60,12 +61,12 @@ graph LR
     J --> M["Final Analysis<br/>& Publication"]
     L --> M
     
-    style A fill:#e1f5ff
-    style C fill:#fff3e0
-    style E fill:#f3e5f5
-    style I fill:#e8f5e9
-    style K fill:#fce4ec
-    style M fill:#fff9c4
+    style A fill:#e1f5ff,stroke:#01579b,stroke-width:2px,color:#000
+    style C fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#000
+    style E fill:#f3e5f5,stroke:#4a148c,stroke-width:2px,color:#000
+    style I fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px,color:#000
+    style K fill:#fce4ec,stroke:#880e4f,stroke-width:2px,color:#000
+    style M fill:#fff9c4,stroke:#f57f17,stroke-width:2px,color:#000
 ```
 
 ---
@@ -502,7 +503,6 @@ GIS Research Analyst | Geographer & Environmental Scientist
 Complutense University of Madrid
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/juan-zotes-orcajo-88a0a51aa/)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:jzotes01@ucm.es)
 
 📧 **Contact:** [jzotes01@ucm.es](mailto:jzotes01@ucm.es) | [juanzotes@gmail.com](mailto:juanzotes@gmail.com)
 
