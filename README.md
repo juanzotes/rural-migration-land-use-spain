@@ -498,12 +498,19 @@ MIT License – see LICENSE file for details.
 
 **Juan Zotes**  
 GIS Research Analyst | Geographer & Environmental Scientist
+
 Complutense University of Madrid
 
-📧 **Contact:** [jzotes01@ucm.es](mailto:jzotes01@ucm.es) | [juanzotes@gmail.com](mailto:juanzotes@gmail.com)  
-🔗 **LinkedIn:** [https://www.linkedin.com/in/juan-zotes-orcajo-88a0a51aa/](https://www.linkedin.com/in/juan-zotes-orcajo-88a0a51aa/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/juan-zotes-orcajo-88a0a51aa/)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:jzotes01@ucm.es)
 
-*Specializing in geospatial analysis, ecosystem restoration, landscape ecology, and biodiversity analytics. Interested in climate tech and sustainable rural development.*
+📧 **Contact:** [jzotes01@ucm.es](mailto:jzotes01@ucm.es) | [juanzotes@gmail.com](mailto:juanzotes@gmail.com)
+
+*Environmental scientist exploring rural systems, geospatial methods, and landscape dynamics. 
+Committed to open-source research and interdisciplinary collaboration.*
+
+📍 Madrid, Spain | 🔬 Geospatial Scientist  
+🛠️ Python | QGIS | GeoPandas | DuckDB | Remote Sensing 
 
 ---
 
