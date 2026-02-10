@@ -501,8 +501,6 @@ MIT License – see LICENSE file for details.
 GIS Research Analyst | Geographer & Environmental Scientist
 
 Complutense University of Madrid 
-![UCM LOGO](https://github.com/user-attachments/assets/8d7cb3ab-15ea-4ef0-a101-c07265de3f45)
-
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/juan-zotes-orcajo-88a0a51aa/)
 
