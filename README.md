@@ -46,7 +46,7 @@ Zoom into recent years to detect neo-rural migration signals, focusing on munici
 ```mermaid
 graph LR
     A["INE Census<br/>(1996-2024)"] --> B["Population<br/>Analysis"]
-    C["INE Socioeconomic<br/>(Pending)"] --> D["Multivariate<br/>Analysis"]
+    C["INE Socioeconomic<br/>(Pending)"] --> D["Statistical<br/>Exploration"]
     E["Municipal Boundaries<br/>(IGN)"] --> B
     E --> F["Spatial Density<br/>Metrics"]
     A --> F
@@ -122,17 +122,15 @@ rural-migration-land-use-spain/
 │       └── raw/
 │
 ├── notebooks/
-│   ├── inQGIS_exploratory/
-│   │   └── explore_agricultural_density_2020.ipynb
-│   │   └── explore_clc2018_mun_stats.ipynb
-│   │
 │   ├── 000_environment_check.ipynb
 │   ├── 00_geographic_administrative_hierarchy.ipynb
 │   ├── 01_data_cleaning_padron_historico.ipynb
 │   ├── 02_demography_population_density.ipynb
 │   ├── 03_demography_sex_ratio.ipynb
 │   ├── 04_population_variation_analysis.ipynb
-│   └── 05_nan_analysis_padron_municipal.ipynb
+│   ├── 05_nan_analysis_padron_municipal.ipynb
+│   ├── v1_pop_variation_accessibility_buffer_maps.ipynb
+│   └── v2_interactive_density_pop_folium.ipynb
 │
 ├── scripts/
 │   └── compute_multi_interval_variation.py
@@ -280,31 +278,29 @@ Comprehensive diagnostic of missing values in census data.
 
 ---
 
-### 7. **Agricultural & Livestock Farm Density (2020)**
-**Notebook:** `explore_agricultural_density_2020.ipynb` (QGIS/PyQGIS)
+### 7. **Population Variation & Accessibility Mapping**
+**Notebook:** `v1_pop_variation_accessibility_buffer_maps.ipynb`
 
-Calculates municipal-level farm density metrics from INE Censo Agrario 2020.
+Exploratory geospatial visualizations integrating population variation analysis with accessibility metrics (buffer analysis).
 
-**Processing:**
-- Layer reprojection to ETRS89/UTM 30N (EPSG:25830) for accurate area calculation
-- Municipal area computation in hectares
-- Density calculation with null value handling
-
-**Output Fields:**
-- `ha` – Municipal area (hectares)
-- `dens_agr` – Agricultural farm density (farms/ha)
-- `dens_gan` – Livestock operation density (operations/ha)
-
-**Integration:** Results merged back to original geodatabase layer (EPSG:4258)
+**Features:**
+- Spatial mapping of multi-interval population changes
+- Buffer-based accessibility analysis 
+- Identification of growth patterns in relation to service accessibility
+- Foundation for focal municipality selection
 
 ---
 
-### 8. **Exploratory Analysis: CORINE Land Cover 2018**
-**Notebook:** `explore_clc2018_mun_stats.ipynb`
+### 8. **Interactive Population Density Visualization**
+**Notebook:** `v2_interactive_density_pop_folium.ipynb`
 
-Aggregates CORINE Land Cover 2018 (100m resolution) to municipal level.
+Interactive web-based visualizations of population density trends (1996–2024) using Folium.
 
-**Purpose:** Establishes baseline for future 2018–2024 land cover change detection
+**Features:**
+- Time-series interactive maps for exploring temporal density evolution
+- Municipal-level choropleth mapping
+- Web-exportable HTML visualizations for stakeholder communication
+- Output: `interactive_density_folium.html` (maps/directory)
 
 ---
 
@@ -325,10 +321,9 @@ Clean Census Dataset (01_padron_clean_1996_2024.csv)
         └─→ [Geographic Integration]
                 ↓
         + Administrative Hierarchy (00)
-        + Farm Density (07)
         ├─→ Identify Growth Hotspots
         ├─→ Filter Focal Municipalities (2018–2024 accelers.)
-        └─→ Multivariate Analysis (pending socioeconomic data)
+        └─→ Statistical Analysis Decision (pending approach selection)
 ```
 
 ---
@@ -348,28 +343,27 @@ Clean Census Dataset (01_padron_clean_1996_2024.csv)
 1. Clean and standardize upon delivery
 2. Join with census data via `Mun_Code`
 3. Exploratory correlation analysis
-4. Feature selection for multivariate models
+4. **Evaluation of statistical approaches:**
+   - Machine learning (Random Forest, clustering, dimensionality reduction)
+   - Outlier/anomaly detection for growth hotspot identification
+   - Time-series analysis or other domain-specific methods
+5. Feature selection and model selection based on research questions
 
 ---
 
-### **DuckDB Database & Analysis** (Q2 2026)
-**Purpose:** Efficient querying and hypothesis testing across multiple data layers
+### **Statistical Analysis Approach Selection** (Q2 2026)
+**Purpose:** Evaluate and select appropriate statistical methods for neo-rural migration detection
 
-**Planned Workflows:**
-- Aggregate municipal characteristics at comarca/provincia levels
-- Calculate composite indices (e.g., "demographic vitality score")
-- Filter and stratify municipalities for focal analysis
-- Time series queries (e.g., "municipalities with >10% growth 2018–2024")
+**Exploration Phase:**
+- Compare machine learning approaches (Random Forest, clustering, unsupervised learning)
+- Explore outlier/anomaly detection for identifying unusual growth patterns
+- Assess time-series or trend-based approaches
+- Determine feature importance and selection criteria
+- Test on focal municipalities (2018–2024 accelerated growth cases)
 
-**Example Query (pseudocode):**
-```sql
-SELECT mun_code, mun_name, comarca, 
-       pop_2024, pop_2018, growth_pct,
-       sex_ratio_2024, density_2024, dens_agr_2020
-FROM padron_analysis
-WHERE growth_pct > 10 AND pop_2024 > 5000
-ORDER BY growth_pct DESC
-```
+**Next Decision Point:**
+- Once socioeconomic data arrives and exploratory analysis is complete, the statistical direction will be finalized
+- Decision criteria: model interpretability, explanatory power, and alignment with research questions on neo-rural migration drivers
 
 ---
 
@@ -414,14 +408,11 @@ ORDER BY growth_pct DESC
 | Population Variation Analysis | ✅ Complete | 100% |
 | Data Quality Assessment (NaN) | ✅ Complete | 100% |
 | Geographic Framework | ✅ Complete | 100% |
-| Farm Density Metrics | ✅ Complete | 100% |
-| **Socioeconomic Integration** | 🚧 In Progress | ~5% |
-| **DuckDB Database Setup** | 🚧 In Progress | ~5% |
-| **Land Cover Change Analysis** | ⏳ Pending Data | ~0% |
-| **Remote Sensing Validation** | ⏳ Planned | ~0% |
-| **Final Analysis & Publication** | ⏳ Planned | ~0% |
+| Exploratory Geospatial Visualizations | ✅ Complete | 100% |
+| **Statistical Analysis Direction** | 🚧 In Progress | ~0% |
+| **Socioeconomic Integration** | ⏳ Planned | ~0% |
 
-**Overall Project Completeness:** ~**10%**
+**Overall Project Completeness:** ~**7%**
 
 ---
 
@@ -469,14 +460,10 @@ See `docs/data_sources.md` for detailed instructions and expected folder structu
 ## 🎯 Next Steps (Priority Order)
 
 - [x] Complete demographic indicators (density, sex ratio)
-- [x] Calculate agricultural farm densities (2020)
 - [x] Comprehensive NaN diagnosis and data quality documentation
-- [ ] 🚧 Integrate INE socioeconomic variables (upon delivery)
-- [ ] 🚧 Set up DuckDB for efficient multivariate queries
-- [ ] 🗺️ Land cover change analysis (upon CORINE 2024 release)
-- [ ] 🛰️ Remote sensing validation (Sentinel-2 NDVI/NDWI/NDBI)
-- [ ] 📊 Interactive visualization dashboards (optimized for GitHub)
-- [ ] 📄 Research publication & findings dissemination
+- [ ] 🚧 **Integrate INE socioeconomic variables** (upon delivery)
+- [ ] 🚧 **Explore statistical approaches** (Random Forest, outlier detection, clustering, time-series analysis, or others)
+- [ ] 🚧 **Finalize & implement chosen methodology**
 
 ---
 
@@ -492,6 +479,7 @@ MIT License – see LICENSE file for details.
 - **Universidad Complutense de Madrid** – Research support
 - **Instituto Nacional de Estadística (INE)** – Historical census and agricultural census data
 - **Instituto Geográfico Nacional (IGN)** – Municipal boundaries and geographic data
+- **Ministerio de Transición Ecológica y Reto Demográfico (MITERD)** – Recent Socioeconomic data
 
 ---
 
