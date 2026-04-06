@@ -129,6 +129,11 @@ rural-migration-land-use-spain/
 │   ├── 03_demography_sex_ratio.ipynb
 │   ├── 04_population_variation_analysis.ipynb
 │   ├── 05_nan_analysis_padron_municipal.ipynb
+│   ├── covid_mortality_analysis.ipynb
+│   ├── p0_goerlich_typology_integration.ipynb
+│   ├── p1a_rural_population_recovery_analysis.ipynb
+│   ├── p1b_estimated_migratory_balance.ipynb
+│   ├── p1c_comparison_padron_vs_migratory.ipynb
 │   ├── v1_pop_variation_accessibility_buffer_maps.ipynb
 │   └── v2_interactive_density_pop_folium.ipynb
 │
@@ -304,6 +309,67 @@ Interactive web-based visualizations of population density trends (1996–2024) 
 
 ---
 
+### 9. **COVID-19 Mortality Analysis**
+**Notebook:** `covid_mortality_analysis.ipynb`
+
+Examines COVID-19 mortality patterns and their relationship with municipal demographic dynamics during the pandemic period.
+
+**Focus:**
+- Temporal evolution of COVID mortality rates
+- Spatial distribution across Spanish municipalities
+- Comparison with population decline/recovery patterns
+- Preliminary implications for pandemic-era rural migration trends
+
+---
+
+### 10. **Typology Integration with Goerlich Classification**
+**Notebook:** `p0_goerlich_typology_integration.ipynb`
+
+Integrates Goerlich typology categories into municipal demographic and spatial data.
+
+**Focus:**
+- Classification of municipalities by rural-urban typology
+- Crosswalk of typology with population growth and density metrics
+- Supports selection of focal municipalities for neo-rural migration analysis
+
+---
+
+### 11. **Rural Population Recovery Analysis**
+**Notebook:** `p1a_rural_population_recovery_analysis.ipynb`
+
+Analyzes rural municipalities that show signs of population recovery and sustained growth.
+
+**Focus:**
+- Identification of recovery cases since 2018
+- Comparison of growth trajectories across typologies
+- Early evidence for post-pandemic rural rebound
+
+---
+
+### 12. **Estimated Migratory Balance**
+**Notebook:** `p1b_estimated_migratory_balance.ipynb`
+
+Estimates migratory balance to distinguish migration-driven growth from natural increase.
+
+**Focus:**
+- Estimated migration inflows and outflows by municipality
+- Analysis of demographic balance versus total population change
+- Validation of neo-rural migration hypotheses
+
+---
+
+### 13. **Padrón vs Migratory Balance Comparison**
+**Notebook:** `p1c_comparison_padron_vs_migratory.ipynb`
+
+Compares official census-based population variation with estimated migratory balance.
+
+**Focus:**
+- Consistency checks between Padrón data and migration estimates
+- Identification of divergences in rural vs non-rural municipalities
+- Implications for measuring rural recovery and migration patterns
+
+---
+
 ## 🔧 Analysis Pipeline
 
 ### Data Flow
@@ -412,7 +478,7 @@ Clean Census Dataset (01_padron_clean_1996_2024.csv)
 | **Statistical Analysis Direction** | 🚧 In Progress | ~0% |
 | **Socioeconomic Integration** | ⏳ Planned | ~0% |
 
-**Overall Project Completeness:** ~**7%**
+**Overall Project Completeness:** ~**10%**
 
 ---
 
@@ -502,6 +568,6 @@ Committed to open-source research and interdisciplinary collaboration.*
 
 ---
 
-**Last updated:** February 2026 | **Project initiated:** December 2025
+**Last updated:** 06/04/2026 | **Project initiated:** December 2025
 
 *This project represents rigorous scientific methodology applied to policy-relevant research questions in rural development and neo-rural migration.*
