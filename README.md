@@ -1,73 +1,27 @@
-# RurIm Escape
-**Geospatial Analysis of Neo-Rural Migration and Land Use Change in Spain (1996–2024)**
+﻿# RurIm Escape
+**Geospatial analysis of rural migration and land use change in Spain**
 
-![Python](https://img.shields.io/badge/python-3.11+-blue.svg) ![DuckDB](https://img.shields.io/badge/database-DuckDB-yellow.svg) ![GeoPandas](https://img.shields.io/badge/geospatial-GeoPandas-green.svg) ![Status](https://img.shields.io/badge/status-active-brightgreen.svg)
+![Python](https://img.shields.io/badge/python-3.11+-blue.svg) ![GeoPandas](https://img.shields.io/badge/geospatial-GeoPandas-green.svg) ![Status](https://img.shields.io/badge/status-active-brightgreen.svg)
 
 ---
 
 ## 📋 Project Overview
 
-**RurIm Escape** investigates demographic shifts in Spanish rural municipalities and their potential relationship with land use changes. This research examines neo-rural migration patterns accelerated by remote work adoption post-COVID-19, using a multi-scale temporal and multivariate approach.
+**RurIm Escape** studies demographic change in Spanish municipalities, with a focus on rural population recovery and recent migration patterns. The project combines municipal registry data with administrative hierarchies and spatial analysis.
 
-### Research Design: Two-Scale Temporal Analysis
+### Main focus
 
-**Phase 1 – Macro-temporal Context (1996–2024):**  
-Establish baseline demographic trends over 28 years to identify long-term patterns of rural depopulation and repopulation.
+- Cleaning and standardizing historical INE municipal registry data.
+- Calculating demographic indicators: population density and sex ratio.
+- Analyzing population variation across multiple time intervals.
+- Integrating administrative municipal hierarchy and territorial anomalies.
 
-**Phase 2 – Focal Period Analysis (2018–2024):**  
-Zoom into recent years to detect neo-rural migration signals, focusing on municipalities with accelerated growth during the pandemic period.
+### Data and scope
 
-### Current Research Questions
-
-- Which Spanish municipalities experienced significant population growth across the full 28-year period (1996–2024)?
-- Do high-growth municipalities show accelerated growth in 2018–2024 compared to historical trends?
-- What demographic characteristics (sex ratio, population density, age structure) define repopulation hotspots?
-- **[In Progress]** How do demographic shifts correlate with service accessibility, economic conditions, and agricultural structure?
-- **[Planned]** Can land use changes (2018–2024) be detected and linked to multivariate socioeconomic patterns?
-
----
-
-## 🛠️ Technical Stack
-
-| Category | Tools & Libraries |
-|----------|------------------|
-| **Data Processing** | Pandas, NumPy, DuckDB |
-| **Geospatial Analysis** | GeoPandas, Shapely, QGIS (PyQGIS) |
-| **Visualization** | Matplotlib, Seaborn, Folium, Plotly |
-| **Workflow** | Jupyter Lab, Conda, Git/GitHub |
-| **Development** | Python 3.11+, Codespaces |
-
-**Note:** DuckDB is the primary database tool for analysis and queries. PostgreSQL/PostGIS integration is planned for future scalability.
-
----
-
-## 📊 Data Integration Workflow
-
-```mermaid
-graph LR
-    A["INE Census<br/>(1996-2024)"] --> B["Population<br/>Analysis"]
-    C["INE Socioeconomic<br/>(Pending)"] --> D["Statistical<br/>Exploration"]
-    E["Municipal Boundaries<br/>(IGN)"] --> B
-    E --> F["Spatial Density<br/>Metrics"]
-    A --> F
-    B --> G["Identify Growth<br/>Hotspots"]
-    D --> G
-    N["Agricultural &<br/>Service Data"] --> D
-    G --> H["Focal Municipalities<br/>(2018-2024)"]
-    I["CORINE<br/>(2018, 2024)"] --> J["Land Cover<br/>Change Detection"]
-    K["Sentinel-2<br/>Imagery"] --> L["Remote Sensing<br/>Validation"]
-    H --> J
-    H --> L
-    J --> M["Final Analysis<br/>& Publication"]
-    L --> M
-    
-    style A fill:#e1f5ff,stroke:#01579b,stroke-width:2px,color:#000
-    style C fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#000
-    style E fill:#f3e5f5,stroke:#4a148c,stroke-width:2px,color:#000
-    style I fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px,color:#000
-    style K fill:#fce4ec,stroke:#880e4f,stroke-width:2px,color:#000
-    style M fill:#fff9c4,stroke:#f57f17,stroke-width:2px,color:#000
-```
+- Main raw source: `data/demography/raw/00_raw_padron_1996_2024.csv`
+- Processed outputs: `data/demography/processed/01_padron_clean_1996_2025.csv`
+- Derived indicators: density and sex ratio 1996–2025
+- Administrative hierarchy: `data/spatial/derived/mun_geographic_administrative_hierarchy.*`
 
 ---
 
@@ -75,43 +29,38 @@ graph LR
 
 ```
 rural-migration-land-use-spain/
-│
 ├── data/
 │   ├── agriculture_livestock/
 │   │   ├── derived/
 │   │   ├── processed/
 │   │   └── raw/
-│   │
 │   ├── demography/
 │   │   ├── derived/
-│   │   │   ├── nan/                          # NaN analysis outputs
-│   │   │   │   ├── nan_analysis_detailed.csv
-│   │   │   │   ├── nan_analysis_pivoted.csv
-│   │   │   │   ├── nan_analysis_by_comarca.csv
-│   │   │   │   └── nan_analysis_geo.gpkg
-│   │   │   ├── padron_variations_all_k.csv
-│   │   │   └── padron_variations_k_*.csv
+│   │   │   ├── 02_population_density_1996_2025.csv
+│   │   │   ├── demography_sex_ratio_1996_2025.csv
+│   │   │   ├── nan/
+│   │   │   ├── padron-variations/
+│   │   │   └── paper1/
 │   │   ├── processed/
-│   │   │   └── 01_padron_clean_1996_2024.csv
+│   │   │   ├── 01_padron_clean_1996_2025.csv
+│   │   │   ├── demography_sex_ratio_1996_2025.csv
+│   │   │   └── p0_padron_goerlich_1996_2025.csv
 │   │   └── raw/
 │   │       ├── 00_raw_padron_1996_2024.csv
-│   │       └── diccionario2024.xlsx
-│   │
+│   │       ├── diccionario26.xlsx
+│   │       └── mnp/
 │   ├── landuse/
 │   │   ├── derived/
 │   │   ├── processed/
 │   │   └── raw/
-│   │
 │   ├── remote_sensing/
 │   │   ├── derived/
 │   │   ├── processed/
 │   │   └── raw/
-│   │
 │   ├── services/
 │   │   ├── derived/
 │   │   ├── processed/
 │   │   └── raw/
-│   │
 │   └── spatial/
 │       ├── derived/
 │       │   ├── mun_geographic_administrative_hierarchy.csv
@@ -120,454 +69,70 @@ rural-migration-land-use-spain/
 │       │   └── territorial_anomalies.gpkg
 │       ├── processed/
 │       └── raw/
-│
 ├── notebooks/
-│   ├── 000_environment_check.ipynb
-│   ├── 00_geographic_administrative_hierarchy.ipynb
-│   ├── 01_data_cleaning_padron_historico.ipynb
-│   ├── 02_demography_population_density.ipynb
-│   ├── 03_demography_sex_ratio.ipynb
-│   ├── 04_population_variation_analysis.ipynb
-│   ├── 05_nan_analysis_padron_municipal.ipynb
-│   ├── covid_mortality_analysis.ipynb
-│   ├── p0_goerlich_typology_integration.ipynb
-│   ├── p1a_rural_population_recovery_analysis.ipynb
-│   ├── p1b_estimated_migratory_balance.ipynb
-│   ├── p1c_comparison_padron_vs_migratory.ipynb
-│   ├── v1_pop_variation_accessibility_buffer_maps.ipynb
-│   └── v2_interactive_density_pop_folium.ipynb
-│
-├── scripts/
-│   └── compute_multi_interval_variation.py
-│
+│   ├── paper 1/
+│   │   ├── p0_goerlich_typology_integration.ipynb
+│   │   ├── p1a_rural_population_recovery_analysis.ipynb
+│   │   ├── p1b_estimated_migratory_balance.ipynb
+│   │   ├── p1c_comparison_padron_vs_migratory.ipynb
+│   │   ├── p2_period_analysis.ipynb
+│   │   ├── p3_demographic_characterization.ipynb
+│   │   ├── p4_spatial_hotspots.ipynb
+│   │   ├── p5a_lisa_spatial_outliers.ipynb
+│   │   ├── p5a_socioeconomic_characterization.ipynb
+│   │   ├── p5b_explanatory_modelling.ipynb
+│   │   ├── p5b_explanatory_modelling.R
+│   │   ├── p5b_forest_plot.R
+│   │   └── p5b_lisa_exploratory.R
+│   └── shared/
+│       ├── 000_environment_check.ipynb
+│       ├── 00_geographic_administrative_hierarchy.ipynb
+│       ├── 01_data_cleaning_padron_historico.ipynb
+│       ├── 02_demography_population_density.ipynb
+│       ├── 03_demography_sex_ratio.ipynb
+│       ├── 04_population_variation_analysis.ipynb
+│       ├── covid_mortality_analysis.ipynb
+│       ├── v1_pop_variation_accessibility_buffer_maps.ipynb
+│       └── v2_interactive_density_pop_folium.ipynb
 ├── docs/
 │   ├── data_sources.md
-│   ├── ine_request_doc-01_2026.md
-│   └── methodology.md
-│
-├── .gitignore
+│   └── ine_request_doc-01_2026.md
+├── outputs/
+│   └── gis_exercise_maps/
+│       └── summary_statistics.csv
+├── scripts/
+│   └── compute_multi_interval_variation.py
+├── requirements.txt
 ├── LICENSE
-├── README.md
-└── requirements.txt
+└── README.md
 ```
 
 ---
 
-## ✅ Completed Work
+## ✅ Current status
 
-### 1. **Geographic & Administrative Hierarchy** 
-**Notebook:** `00_geographic_administrative_hierarchy.ipynb`
-
-Establishes the spatial framework for all municipal-level analysis.
-
-**Outputs:**
-- `mun_geographic_administrative_hierarchy.csv` – Hierarchical codes (CCAA, Provincia, Comarca, Mun_Code)
-- `mun_geographic_administrative_hierarchy.gpkg` – Boundaries + attributes (EPSG:4258)
-- `territorial_anomalies.csv` / `.gpkg` – Municipalities with administrative irregularities
+- `data/demography/raw/` contains the original INE municipal registry source.
+- `data/demography/processed/` contains cleaned data ready for analysis.
+- `data/demography/derived/` includes density and sex ratio indicators, as well as interval analysis and `paper1` outputs.
+- `data/spatial/derived/` includes administrative municipal hierarchy and territorial anomaly files.
+- `notebooks/shared/` contains the cleaning and indicator calculation workflow.
+- `notebooks/paper 1/` contains manuscript-oriented analysis notebooks.
 
 ---
 
-### 2. **Data Cleaning & Standardization**
-**Notebook:** `01_data_cleaning_padron_historico.ipynb`
-
-Processes raw INE census data into analysis-ready format.
-
-**Source:** INE Padrón Municipal Histórico (1996–2024)  
-**Coverage:** 8,132 municipalities × 28 years (excluding 1997)  
-**Data Quality:** 99.7% completeness (1,860 missing values documented)
-
-**Key Processing:**
-- Standardization of INE CSV format (semicolon-separated, Latin-1 encoding)
-- Municipality code extraction with leading zero preservation
-- Removal of invalid census year (1997)
-- Handling of missing values with detailed documentation
-
-**Output:**
-- `01_padron_clean_1996_2024.csv` – Clean, tidy long-format dataset (683,088 records)
-
----
-
-### 3. **Demographic Indicators: Population Density**
-**Notebook:** `02_demography_population_density.ipynb`
-
-Calculates municipal population density (inhabitants/km²) for 1996–2024.
-
-**Metrics:**
-- Total population density: Pop_Total / Area
-- Density by sex category: Hombres/Area, Mujeres/Area
-- Temporal trends and spatial distribution
-
-**Key Findings (2024):**
-- Mean density: ~78 hab/km²
-- Median density: ~25 hab/km² (highly right-skewed distribution)
-- 6,000+ municipalities classified as rural (<50 hab/km²)
-
-**Output:**
-- `03_population_density_1996_2024.csv` – Density metrics across time
-
----
-
-### 4. **Demographic Indicators: Sex Ratio**
-**Notebook:** `03_demography_sex_ratio.ipynb`
-
-Computes masculinity ratio (Male/Female × 100) for all municipalities and years.
-
-**Metrics:**
-- Sex ratio by municipality and year
-- Temporal evolution and spatial patterns
-- Identification of demographic anomalies
-
-**Key Findings (2024):**
-- National mean sex ratio: ~98.5 (slightly more women)
-- Regional variation: 90–110 ratio across municipalities
-- Rural areas trend toward higher female proportions (aging effect)
-
-**Output:**
-- `03_demography_sex_ratio_1996_2024.csv` – Sex ratio time series
-
----
-
-### 5. **Population Variation Analysis: Multi-Interval Change**
-**Notebook:** `04_population_variation_analysis.ipynb`
-
-Analyzes population change at multiple temporal intervals (k = 1 to 28 years).
-
-**Methodology:**
-
-```
-Variation(k, t) = ((Pop[t] - Pop[t-k]) / Pop[t-k]) × 100
-```
-
-**Outputs:**
-- `padron_variations_all_k.csv` – Combined dataset (all intervals)
-- `padron_variations_k_01.csv` through `k_28.csv` – Individual CSVs per interval length
-
-**Features:**
-- Robust handling of missing data and division-by-zero cases
-- Vectorized operations for computational efficiency
-- Enables identification of growth breakpoints and acceleration periods
-
-**Reusable Function:**
-- `compute_multi_interval_variation.py` – Portable function for custom interval analysis
-
----
-
-### 6. **Data Quality Assessment: Missing Values (NaN) Analysis**
-**Notebook:** `05_nan_analysis_padron_municipal.ipynb`
-
-Comprehensive diagnostic of missing values in census data.
-
-**Scope:**
-- Identifies which municipalities have incomplete data
-- Quantifies data gaps by demographic category (Hombres, Mujeres, Total)
-- Maps temporal patterns of missing values
-- Provides usage recommendations by analysis type
-
-**Key Findings:**
-- **38 municipalities** (0.47%) with missing data
-- **8,094 municipalities** (99.53%) with complete records
-- NaN concentrated in older years (1996–2005)
-- **2019–2024:** Practically zero missing values
-
-**Outputs:**
-- `nan_analysis_detailed.csv` – Long format (114 records: 38 mun × 3 categories)
-- `nan_analysis_pivoted.csv` – Wide format (38 municipalities, 1 row each)
-- `nan_analysis_by_comarca.csv` – County-level summary (33 affected counties)
-- `nan_analysis_geo.gpkg` – Geospatial version with 3 layers (detailed, pivoted, comarca)
-
-**Usage Recommendations:**
-- ✅ **2019–2024 analysis:** Use without restrictions
-- ✅ **2010–2024 analysis:** Very reliable (max 20 mun with gaps in 2010)
-- ⚠️ **1996–2024 analysis:** Document affected municipalities
-- ✅ **Regional analysis:** Safe (NaN not geographically clustered)
-
----
-
-### 7. **Population Variation & Accessibility Mapping**
-**Notebook:** `v1_pop_variation_accessibility_buffer_maps.ipynb`
-
-Exploratory geospatial visualizations integrating population variation analysis with accessibility metrics (buffer analysis).
-
-**Features:**
-- Spatial mapping of multi-interval population changes
-- Buffer-based accessibility analysis 
-- Identification of growth patterns in relation to service accessibility
-- Foundation for focal municipality selection
-
----
-
-### 8. **Interactive Population Density Visualization**
-**Notebook:** `v2_interactive_density_pop_folium.ipynb`
-
-Interactive web-based visualizations of population density trends (1996–2024) using Folium.
-
-**Features:**
-- Time-series interactive maps for exploring temporal density evolution
-- Municipal-level choropleth mapping
-- Web-exportable HTML visualizations for stakeholder communication
-- Output: `interactive_density_folium.html` (maps/directory)
-
----
-
-### 9. **COVID-19 Mortality Analysis**
-**Notebook:** `covid_mortality_analysis.ipynb`
-
-Examines COVID-19 mortality patterns and their relationship with municipal demographic dynamics during the pandemic period.
-
-**Focus:**
-- Temporal evolution of COVID mortality rates
-- Spatial distribution across Spanish municipalities
-- Comparison with population decline/recovery patterns
-- Preliminary implications for pandemic-era rural migration trends
-
----
-
-### 10. **Typology Integration with Goerlich Classification**
-**Notebook:** `p0_goerlich_typology_integration.ipynb`
-
-Integrates Goerlich typology categories into municipal demographic and spatial data.
-
-**Focus:**
-- Classification of municipalities by rural-urban typology
-- Crosswalk of typology with population growth and density metrics
-- Supports selection of focal municipalities for neo-rural migration analysis
-
----
-
-### 11. **Rural Population Recovery Analysis**
-**Notebook:** `p1a_rural_population_recovery_analysis.ipynb`
-
-Analyzes rural municipalities that show signs of population recovery and sustained growth.
-
-**Focus:**
-- Identification of recovery cases since 2018
-- Comparison of growth trajectories across typologies
-- Early evidence for post-pandemic rural rebound
-
----
-
-### 12. **Estimated Migratory Balance**
-**Notebook:** `p1b_estimated_migratory_balance.ipynb`
-
-Estimates migratory balance to distinguish migration-driven growth from natural increase.
-
-**Focus:**
-- Estimated migration inflows and outflows by municipality
-- Analysis of demographic balance versus total population change
-- Validation of neo-rural migration hypotheses
-
----
-
-### 13. **Padrón vs Migratory Balance Comparison**
-**Notebook:** `p1c_comparison_padron_vs_migratory.ipynb`
-
-Compares official census-based population variation with estimated migratory balance.
-
-**Focus:**
-- Consistency checks between Padrón data and migration estimates
-- Identification of divergences in rural vs non-rural municipalities
-- Implications for measuring rural recovery and migration patterns
-
----
-
-## 🔧 Analysis Pipeline
-
-### Data Flow
-
-```
-Raw INE Census Data
-        ↓
-[01] Data Cleaning & Standardization
-        ↓
-Clean Census Dataset (01_padron_clean_1996_2024.csv)
-        ├─→ [02] Population Density Calculation
-        ├─→ [03] Sex Ratio Calculation
-        ├─→ [04] Multi-Interval Variation Analysis
-        ├─→ [05] NaN Diagnostic & Data Quality Assessment
-        └─→ [Geographic Integration]
-                ↓
-        + Administrative Hierarchy (00)
-        ├─→ Identify Growth Hotspots
-        ├─→ Filter Focal Municipalities (2018–2024 accelers.)
-        └─→ Statistical Analysis Decision (pending approach selection)
-```
-
----
-
-## 🚧 In Progress
-
-### **INE Socioeconomic Data Integration** (Data Request: Jan 2026)
-**Status:** Awaiting INE response
-
-**Expected Variables (40+):**
-- **Demographic:** Age distribution, foreign vs. autochthonous population
-- **Economic:** Household income evolution, employment, unemployment, retirement rates
-- **Services:** Hospital/highway access times, pharmacy counts, internet coverage (≥30 Mbps, ≥100 Mbps)
-- **Agricultural:** Farm counts, Land use (UAA/SAU), livestock numbers, CAP subsidies, organic farming
-
-**Integration Plan:**
-1. Clean and standardize upon delivery
-2. Join with census data via `Mun_Code`
-3. Exploratory correlation analysis
-4. **Evaluation of statistical approaches:**
-   - Machine learning (Random Forest, clustering, dimensionality reduction)
-   - Outlier/anomaly detection for growth hotspot identification
-   - Time-series analysis or other domain-specific methods
-5. Feature selection and model selection based on research questions
-
----
-
-### **Statistical Analysis Approach Selection** (Q2 2026)
-**Purpose:** Evaluate and select appropriate statistical methods for neo-rural migration detection
-
-**Exploration Phase:**
-- Compare machine learning approaches (Random Forest, clustering, unsupervised learning)
-- Explore outlier/anomaly detection for identifying unusual growth patterns
-- Assess time-series or trend-based approaches
-- Determine feature importance and selection criteria
-- Test on focal municipalities (2018–2024 accelerated growth cases)
-
-**Next Decision Point:**
-- Once socioeconomic data arrives and exploratory analysis is complete, the statistical direction will be finalized
-- Decision criteria: model interpretability, explanatory power, and alignment with research questions on neo-rural migration drivers
-
----
-
-### **Land Cover Change Detection (Q2 2026)**
-**Status:** Awaiting CORINE 2024 release (expected Q2 2026)
-
-**Approach – Focused on 2018–2024:**
-1. **Baseline:** CORINE 2018 (44 land use classes, 100m resolution)
-2. **Target:** CORINE 2024 (upon release)
-3. **Spatial Filter:** Municipalities with >15% population growth (2018–2024)
-4. **Change Categories:**
-   - Agricultural expansion/abandonment (class transitions 211↔231)
-   - Urbanization (artificial surfaces 111–112)
-   - Pasture/grassland changes (231, 321)
-
-**Validation:** Cross-reference with INE agricultural census (2020)
-
----
-
-### **Remote Sensing Validation (Q3 2026)**
-**Objective:** Validate land cover changes with multispectral vegetation indices (2018–2024)
-
-**Workflow:**
-1. Median compositing per growing season (April–September) for 2018 and 2024
-2. Index calculation:
-   - **NDVI** – Agricultural activity, vegetation health
-   - **NDWI** – Irrigation expansion
-   - **NDBI** – Urban sprawl detection
-3. Change detection: NDVI₂₀₂₄ - NDVI₂₀₁₈
-4. Statistical correlation with population growth and agricultural variables
-
-**Data Source:** Google Earth Engine (Sentinel-2 L2A, 10m resolution)
-
----
-
-## 📊 Project Status & Completeness
-
-| Component | Status | Completeness |
-|-----------|--------|--------------|
-| Census Data Cleaning | ✅ Complete | 100% |
-| Demographic Indicators | ✅ Complete | 100% |
-| Population Variation Analysis | ✅ Complete | 100% |
-| Data Quality Assessment (NaN) | ✅ Complete | 100% |
-| Geographic Framework | ✅ Complete | 100% |
-| Exploratory Geospatial Visualizations | ✅ Complete | 100% |
-| **Statistical Analysis Direction** | 🚧 In Progress | ~0% |
-| **Socioeconomic Integration** | ⏳ Planned | ~0% |
-
-**Overall Project Completeness:** ~**10%**
-
----
-
-## 🚀 Reproducibility
-
-### Environment Setup
+## 🚀 How to start
 
 ```bash
-git clone https://github.com/juanzotes/rural-migration-land-use-spain.git
-cd rural-migration-land-use-spain
-conda create -n rurim_escape python=3.11
-conda activate rurim_escape
 pip install -r requirements.txt
-jupyter lab
 ```
 
-### Data Access
-
-⚠️ **Important:** Data files are NOT included in this repository.
-
-**Required datasets:**
-- **Census data (Padrón Municipal Histórico):** [INE Download](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177012&menu=resultados&idp=1254734710990)
-- **Agricultural census (Censo Agrario 2020):** [INE Download](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176851&menu=resultados&idp=1254735727106)
-- **Municipal boundaries:** [IGN Centro de Descargas](https://centrodedescargas.cnig.es/)
-
-See `docs/data_sources.md` for detailed instructions and expected folder structure.
+- Open Jupyter Lab or VS Code.
+- Run the notebooks in `notebooks/shared/` first.
+- Review `notebooks/paper 1/` for the final analysis.
 
 ---
 
-## 📈 Key Preliminary Insights
+## ℹ️ Notes
 
-### Macro-temporal Trends (1996–2024)
-
-- **Sample Size:** 8,220 municipalities, 28-year time series
-- **Data Completeness:** 99.7% (robust baseline for analysis)
-- **Observation:** Certain peri-urban and coastal municipalities exhibit sustained growth (>20% cumulative), with potential acceleration in 2018–2024
-
-### Focal Period (2018–2024)
-
-- **Working Hypothesis:** Municipalities with anomalous growth in 2018–2024 (relative to 1996–2018 trend) may represent neo-rural migration hotspots driven by pandemic-era remote work adoption
-- **Next Step:** Prioritize these municipalities for land cover change detection and socioeconomic correlation analysis
-
----
-
-## 🎯 Next Steps (Priority Order)
-
-- [x] Complete demographic indicators (density, sex ratio)
-- [x] Comprehensive NaN diagnosis and data quality documentation
-- [ ] 🚧 **Integrate INE socioeconomic variables** (upon delivery)
-- [ ] 🚧 **Explore statistical approaches** (Random Forest, outlier detection, clustering, time-series analysis, or others)
-- [ ] 🚧 **Finalize & implement chosen methodology**
-
----
-
-## 📜 License
-
-MIT License – see LICENSE file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- **Cristina Herrero Jáuregui** – ADAPTA Research Group (Socio-Ecological Systems, Landscape & Rural Development)
-- **Universidad Complutense de Madrid** – Research support
-- **Instituto Nacional de Estadística (INE)** – Historical census and agricultural census data
-- **Instituto Geográfico Nacional (IGN)** – Municipal boundaries and geographic data
-- **Ministerio de Transición Ecológica y Reto Demográfico (MITERD)** – Recent Socioeconomic data
-
----
-
-## 👨‍🔬 Author
-
-**Juan Zotes**  
-GIS Research Analyst | Geographer & Environmental Scientist
-
-Complutense University of Madrid 
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/juan-zotes-orcajo-88a0a51aa/)
-
-📧 **Contact:** [jzotes01@ucm.es](mailto:jzotes01@ucm.es) | [juanzotes@gmail.com](mailto:juanzotes@gmail.com)
-
-*Environmental scientist exploring rural systems, geospatial methods, and landscape dynamics. 
-Committed to open-source research and interdisciplinary collaboration.*
-
-📍 Madrid, Spain | 🔬 Geospatial Scientist  
-🛠️ Python | QGIS | GeoPandas | DuckDB | Remote Sensing 
-
----
-
-**Last updated:** 06/04/2026 | **Project initiated:** December 2025
-
-*This project represents rigorous scientific methodology applied to policy-relevant research questions in rural development and neo-rural migration.*
+- The folders `data/landuse/`, `data/remote_sensing/`, and `data/services/` exist as project structure but do not yet contain processed data.
+- Project documentation is available in `docs/data_sources.md` and `docs/ine_request_doc-01_2026.md`.
