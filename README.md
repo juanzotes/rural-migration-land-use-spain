@@ -1,7 +1,7 @@
 ﻿# RurIm Escape
 **Geospatial analysis of rural migration and land use change in Spain**
 
-![Python](https://img.shields.io/badge/python-3.11+-blue.svg) ![GeoPandas](https://img.shields.io/badge/geospatial-GeoPandas-green.svg) ![Status](https://img.shields.io/badge/status-active-brightgreen.svg)
+![Python](https://img.shields.io/badge/python-3.11+-blue.svg) ![R](https://img.shields.io/badge/R-4.0+-276DC3.svg) ![Status](https://img.shields.io/badge/status-active-brightgreen.svg)
 
 ---
 
