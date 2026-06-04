@@ -43,3 +43,5 @@ build/
 .idea/
 *.swp
 ```
+"notebooks/paper 1/.RData" 
+"notebooks/paper 1/.Rhistory" 
