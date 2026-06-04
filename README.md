@@ -112,23 +112,44 @@ rural-migration-land-use-spain/
 
 ## 📌 Key Data
 
-- Raw INE source: `data/demography/raw/00_raw_padron_1996_2024.csv`
-- Processed data: `data/demography/processed/01_padron_clean_1996_2025.csv`
-- Derived indicators: `data/demography/derived/02_population_density_1996_2025.csv` and `data/demography/derived/demography_sex_ratio_1996_2025.csv`
-- Administrative hierarchy and territorial anomalies:
-  - `data/spatial/derived/mun_geographic_administrative_hierarchy.*`
-  - `data/spatial/derived/territorial_anomalies.*`
+**Raw sources:**
+- `data/demography/raw/00_raw_padron_1996_2024.csv` — INE Padrón Municipal registry (1996–2024)
+- `data/demography/raw/diccionario26.xlsx` — Code dictionary for Padrón codes
+- `data/demography/raw/mnp/` — Natural Population Movement (MNP) data
+
+**Processed data:**
+- `data/demography/processed/01_padron_clean_1996_2025.csv` — Harmonized Padrón (1996–2025)
+- `data/demography/processed/p0_padron_goerlich_1996_2025.csv` — Padrón with Goerlich typology classification
+- `data/demography/processed/demography_sex_ratio_1996_2025.csv` — Sex ratio by municipality-year
+
+**Derived indicators:**
+- `data/demography/derived/02_population_density_1996_2025.csv` — Population density (inh/km²)
+- `data/demography/derived/demography_sex_ratio_1996_2025.csv` — Sex ratio statistics
+- `data/demography/derived/paper1/` — Paper 1 derived datasets and analysis tables
+- `data/demography/derived/paper2/` — Paper 2 derived datasets
+- `data/demography/derived/padron-variations/` — Population variation metrics
+- `data/demography/derived/nan/` — Missing data documentation
+
+**Spatial data:**
+- `data/spatial/derived/mun_geographic_administrative_hierarchy.csv` and `.gpkg` — Municipal administrative hierarchy with geometry
+- `data/spatial/derived/territorial_anomalies.csv` and `.gpkg` — Territorial boundary changes and anomalies
+
+**Outputs and maps:**
+- `outputs/gis_exercise_maps/` — Generated map visualizations (PNG) and `summary_statistics.csv`
+- `data/maps/interactive_density_folium.html` — Interactive population density map
 
 ---
 
 ## ✅ Current Status
 
-- Notebooks and scripts are organized to reproduce data cleaning and analysis.
-- `notebooks/shared/` contains the data preparation and indicator calculation workflow.
-- `notebooks/paper 1/` contains thematic analysis for the final manuscript.
-- `notebooks/paper 2/` includes the additional study area definition.
-- `data/landuse/`, `data/remote_sensing/`, `data/services/`, and `data/agriculture_livestock/` preserve the structure for future work.
-- `docs/` documents sources and INE-related data requests.
+- **Data preparation:** Complete for demography, spatial, and typology workflows (`notebooks/shared/`)
+- **Paper 1 analyses:** All 5 sections complete with analysis notebooks and R statistical models
+  - Rural recovery, migration balance, demographic characterization, spatial hotspots, socioeconomic analysis
+  - Derived datasets in `data/demography/derived/paper1/`
+  - Maps and figures in `figures/` and `outputs/gis_exercise_maps/`
+- **Paper 2:** Study area definition workflow initialized
+- **Future data domains:** `data/landuse/`, `data/remote_sensing/`, `data/services/`, `data/agriculture_livestock/` structures reserved for planned integrations
+- **Documentation:** `docs/` contains data sources and INE API request documentation
 
 ---
 
@@ -138,17 +159,37 @@ rural-migration-land-use-spain/
 pip install -r requirements.txt
 ```
 
-Recommended steps:
+**Recommended workflow:**
 
-1. Open the repository in Jupyter Lab or VS Code.
-2. Run the notebooks in `notebooks/shared/`.
-3. Review `notebooks/paper 1/` for the main results.
-4. Refer to `notebooks/paper 2/` for the study area process.
+1. **Data preparation** (if reprocessing from raw INE data):
+   - Start with `notebooks/shared/000_environment_check.ipynb` to verify your setup
+   - Run `notebooks/shared/00_geographic_administrative_hierarchy.ipynb` to establish spatial reference
+   - Execute `notebooks/shared/01_data_cleaning_padron_historico.ipynb` to harmonize raw Padrón data
+   - Generate indicators with `02_demography_population_density.ipynb`, `03_demography_sex_ratio.ipynb`, and `04_population_variation_analysis.ipynb`
+
+2. **Paper 1 analyses:**
+   - Start with `notebooks/paper 1/p0_goerlich_typology_integration.ipynb` to integrate typology classifications
+   - Follow thematic sections: p1a (rural recovery), p1b (migration balance), p1c (comparison), p2 (periods), p3 (demographics), p4 (hotspots), p5a (local outliers/socioeconomics)
+   - Statistical models in R: `p5b_explanatory_modelling.R`, `p5c_pca.R`, `p5d_permanova.R`
+
+3. **Paper 2:**
+   - Review study area definition in `notebooks/paper 2/s0_study_area_definition.ipynb`
+
+4. **Outputs:**
+   - Check `figures/` for manuscript figures organized by analysis theme
+   - Review `outputs/gis_exercise_maps/` for map visualizations and summary statistics
 
 ---
 
 ## 📎 Additional Notes
 
-- `data/maps/` is available for geospatial files and map outputs.
-- `outputs/gis_exercise_maps/summary_statistics.csv` contains map-derived summary statistics.
-- The current structure supports demographic, spatial, and municipal typology analysis.
+- **Geospatial files:** `data/spatial/derived/` contains administrative geometries in both CSV (attribute tables) and GeoPackage (vector) formats
+- **Interactive maps:** `data/maps/interactive_density_folium.html` provides web-based exploratory visualizations
+- **Map outputs:** `outputs/gis_exercise_maps/` includes PNG maps for periods 2011–2017, 2018–2021, and 2021–2024 with fixed projections
+- **Paper 1 derived data:** Extensive dataset collection in `data/demography/derived/paper1/` includes:
+  - Behavioral matrices and classifications (dynamisers, reverters, stable)
+  - LISA-based spatial outlier analysis outputs
+  - PCA scores and statistical test results (Kruskal–Wallis, Dunn post-hoc, Spearman correlations)
+  - Logistic regression model coefficients and metrics
+- **Reproducibility:** Use `scripts/compute_multi_interval_variation.py` for multi-period demographic calculations
+- **Statistical models:** R models (`.R` files) handle PERMANOVA, PCA, forest plots, and exploratory LISA analysis
