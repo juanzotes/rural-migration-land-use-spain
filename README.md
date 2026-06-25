@@ -35,6 +35,52 @@ rural-migration-land-use-spain/
 │   │   │   ├── nan/
 │   │   │   ├── padron-variations/
 │   │   │   ├── paper1/
+│   │   │   │   ├── discussion_HL_dynamiser.csv
+│   │   │   │   ├── discussion_HL_reverter.csv
+│   │   │   │   ├── discussion_LH.csv
+│   │   │   │   ├── p1b_annual_mig_balance_by_size.csv
+│   │   │   │   ├── p1b_annual_mig_balance_by_typology.csv
+│   │   │   │   ├── p1b_annual_mig_balance_national.csv
+│   │   │   │   ├── p1b_mnp_vegetative_balance_raw.csv
+│   │   │   │   ├── p1_annual_net_change_by_size.csv
+│   │   │   │   ├── p1_annual_net_change_by_typology.csv
+│   │   │   │   ├── p1_annual_net_change_national.csv
+│   │   │   │   ├── p2_admin_agg_ccaa.csv
+│   │   │   │   ├── p2_admin_agg_comarca.csv
+│   │   │   │   ├── p2_admin_agg_prov.csv
+│   │   │   │   ├── p2_periods_AB_combined.csv
+│   │   │   │   ├── p2_period_A_2010_2017.csv
+│   │   │   │   ├── p2_period_B_2018_2025.csv
+│   │   │   │   ├── p3_behavioural_matrix.csv
+│   │   │   │   ├── p3_matrix_summary.csv
+│   │   │   │   ├── p3_top_growing_rural.csv
+│   │   │   │   ├── p4_cluster_summary.csv
+│   │   │   │   ├── p4_dynamisers_classified.csv
+│   │   │   │   ├── p4_reverters_classified.csv
+│   │   │   │   ├── p5a_descriptive_stats.csv
+│   │   │   │   ├── p5a_dunn_results.csv
+│   │   │   │   ├── p5a_kruskal_wallis_results.csv
+│   │   │   │   ├── p5a_lisa_descriptive_stats.csv
+│   │   │   │   ├── p5a_lisa_dunn_results.csv
+│   │   │   │   ├── p5a_lisa_kw_results.csv
+│   │   │   │   ├── p5a_master_dataset.csv
+│   │   │   │   ├── p5a_rural_analysis_dataset.csv
+│   │   │   │   ├── p5a_selected_variables.csv
+│   │   │   │   ├── p5a_spearman_correlations.csv
+│   │   │   │   ├── p5b_lisa_exploratory_metrics.csv
+│   │   │   │   ├── p5b_lisa_model_coefficients.csv
+│   │   │   │   ├── p5b_lisa_model_metrics.csv
+│   │   │   │   ├── p5b_model_coefficients.csv
+│   │   │   │   ├── p5b_model_metrics.csv
+│   │   │   │   ├── p5b_summary_tables.docx
+│   │   │   │   ├── p5b_summary_tables.pdf
+│   │   │   │   ├── p5c_pca_metadata.rds
+│   │   │   │   ├── p5c_pca_scores.csv
+│   │   │   │   ├── p5d_hl_dynamisers_profile.csv
+│   │   │   │   ├── p5d_hl_dynamisers_summary.csv
+│   │   │   │   ├── p5d_hl_vs_nonhl_reverters.csv
+│   │   │   │   ├── p5d_lisa_behavioural_composition.csv
+│   │   │   │   └── p5d_lisa_kruskal_wallis.csv
 │   │   │   └── paper2/
 │   │   ├── processed/
 │   │   │   ├── 01_padron_clean_1996_2025.csv
@@ -81,11 +127,12 @@ rural-migration-land-use-spain/
 │   │   ├── p4_spatial_hotspots.ipynb
 │   │   ├── p5a_lisa_spatial_outliers.ipynb
 │   │   ├── p5a_socioeconomic_characterization.ipynb
-│   │   ├── p5b_explanatory_modelling.ipynb
 │   │   ├── p5b_explanatory_modelling.R
 │   │   ├── p5b_forest_plot.R
 │   │   ├── p5b_lisa_exploratory.R
-│   │   └── p5b_tables.R
+│   │   ├── p5b_tables.R
+│   │   ├── p5c_pca.R
+│   │   └── p5d_permanova.R
 │   ├── paper 2/
 │   │   └── s0_study_area_definition.ipynb
 │   └── shared/
@@ -170,7 +217,7 @@ pip install -r requirements.txt
 2. **Paper 1 analyses:**
    - Start with `notebooks/paper 1/p0_goerlich_typology_integration.ipynb` to integrate typology classifications
    - Follow thematic sections: p1a (rural recovery), p1b (migration balance), p1c (comparison), p2 (periods), p3 (demographics), p4 (hotspots), p5a (local outliers/socioeconomics)
-   - Statistical models in R: `p5b_explanatory_modelling.R`, `p5c_pca.R`, `p5d_permanova.R`
+   - Statistical models in R: `notebooks/paper 1/p5b_explanatory_modelling.R`, `notebooks/paper 1/p5b_forest_plot.R`, `notebooks/paper 1/p5b_lisa_exploratory.R`, `notebooks/paper 1/p5b_tables.R`, `notebooks/paper 1/p5c_pca.R`, `notebooks/paper 1/p5d_permanova.R`
 
 3. **Paper 2:**
    - Review study area definition in `notebooks/paper 2/s0_study_area_definition.ipynb`

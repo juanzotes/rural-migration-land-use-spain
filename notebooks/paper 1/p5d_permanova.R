@@ -567,3 +567,106 @@ cat("\nOutputs:\n")
 cat("  Figures ->", FIG_DIR, "\n")
 cat("  Tables  ->", TAB_DIR, "\n")
 cat("==================================================\n")
+
+# ══════════════════════════════════════════════════════════════════════════════
+# FIGURAS EN CASTELLANO — p5d
+# Pegar al final del script. Requiere que todos los objetos anteriores
+# (perm_rr, perm_ra, scores_df, disp_df, tab2, var_pct, etc.) estén en memoria.
+# ══════════════════════════════════════════════════════════════════════════════
+
+GROUP_LABELS_ES <- c(
+  "Grows in both"           = "Dinamizadores",
+  "Reverses in B"           = "Reversores",
+  "Loses in B"              = "Pérdida en B",
+  "Structural depopulation" = "Despoblación estructural"
+)
+
+TYPOLOGY_LABELS_ES <- c(
+  "Rural-Remote"      = "Rural-Remoto",
+  "Rural-Accessible"  = "Rural-Accesible"
+)
+
+SOURCE_ES <- "Fuente: elaboración propia a partir del Padrón Municipal de Habitantes (INE, 1996–2025) y SIDAMUN (MITERD, 2023)."
+
+# ── Fig 3 ES: Boxplot betadisper ─────────────────────────────────────────────
+disp_df_es <- disp_df %>%
+  mutate(
+    group    = recode(group,
+                      "Dynamisers"         = "Dinamizadores",
+                      "Reverters"          = "Reversores",
+                      "Loses in B"         = "Pérdida en B",
+                      "Structural decline" = "Despoblación estructural"),
+    group    = factor(group, levels = unname(GROUP_LABELS_ES)),
+    typology = recode(typology, !!!TYPOLOGY_LABELS_ES),
+    typology = factor(typology, levels = c("Rural-Remoto", "Rural-Accesible"))
+  )
+
+p_disp_es <- ggplot(disp_df_es,
+                    aes(x = group, y = distance, fill = group)) +
+  geom_boxplot(outlier.size = 0.5, outlier.alpha = 0.4,
+               width = 0.55, alpha = 0.8) +
+  facet_wrap(~ typology) +
+  scale_fill_manual(
+    values = setNames(GROUP_COLORS, unname(GROUP_LABELS_ES)),
+    guide  = "none"
+  ) +
+  labs(title    = "Dispersión multivariante intragrupo (betadisper)",
+       subtitle = "Distancia al centroide del grupo en el espacio de puntuaciones de CP",
+       x = NULL, y = "Distancia al centroide",
+       caption  = paste0("Valores menores indican mayor homogeneidad interna del grupo. ",
+                         SOURCE_ES)) +
+  theme_rurimescape() +
+  theme(axis.text.x = element_text(angle = 25, hjust = 1))
+
+ggsave(file.path(FIG_DIR, "p5d_fig3_dispersion_boxplot_es.png"),
+       p_disp_es, width = 10, height = 5, dpi = 300)
+cat("Fig 3 ES guardada\n")
+
+
+# ── Fig 4 ES: Centroides en espacio ACP con elipses ──────────────────────────
+centroids_df_es <- scores_df %>%
+  group_by(behavioural_group, tipo_goerlich) %>%
+  summarise(PC1 = median(PC1), PC2 = median(PC2), n = n(), .groups = "drop") %>%
+  mutate(label = paste0(recode(behavioural_group, !!!GROUP_LABELS_ES),
+                        "\n(n=", n, ")"))
+
+p_centroids_es <- ggplot() +
+  stat_ellipse(data = scores_df,
+               aes(x = PC1, y = PC2,
+                   colour = behavioural_group,
+                   fill   = behavioural_group),
+               type = "norm", level = 0.68,
+               geom = "polygon", alpha = 0.08, linewidth = 0.4) +
+  geom_point(data = centroids_df_es,
+             aes(x = PC1, y = PC2, fill = behavioural_group),
+             shape = 23, size = 5, stroke = 0.8, colour = "white") +
+  geom_text_repel(data = centroids_df_es,
+                  aes(x = PC1, y = PC2, label = label,
+                      colour = behavioural_group),
+                  size = 3.5, fontface = "bold",
+                  max.overlaps = 10, segment.size = 0.3) +
+  facet_wrap(~ tipo_goerlich,
+             labeller = labeller(tipo_goerlich = c(
+               "Rural - Remoto"    = "Rural-Remoto",
+               "Rural - Accesible" = "Rural-Accesible"))) +
+  geom_hline(yintercept = 0, linetype = "dashed",
+             colour = "#bbbbbb", linewidth = 0.4) +
+  geom_vline(xintercept = 0, linetype = "dashed",
+             colour = "#bbbbbb", linewidth = 0.4) +
+  scale_colour_manual(values = GROUP_COLORS, guide = "none") +
+  scale_fill_manual(values   = GROUP_COLORS, guide = "none") +
+  labs(title    = "Centroides de grupo en el espacio del ACP (CP1 × CP2)",
+       subtitle = sprintf("Rural-Remoto: R² = %.3f, p < 0,001 | Rural-Accesible: R² = %.3f, p < 0,001",
+                          perm_rr$R2, perm_ra$R2),
+       x       = sprintf("CP1 (%.1f%% de varianza)", var_pct[1]),
+       y       = sprintf("CP2 (%.1f%% de varianza)", var_pct[2]),
+       caption = paste0("Elipses = elipse de confianza normal al 68%. ",
+                        "Los rombos indican las medianas de grupo.\n",
+                        SOURCE_ES)) +
+  theme_rurimescape()
+
+ggsave(file.path(FIG_DIR, "p5d_fig4_pca_centroids_es.png"),
+       p_centroids_es, width = 12, height = 6, dpi = 300)
+cat("Fig 4 ES guardada\n")
+
+cat("\n-- Figuras en castellano (p5d) guardadas en:", FIG_DIR, "--\n")

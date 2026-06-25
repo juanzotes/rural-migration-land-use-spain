@@ -820,3 +820,218 @@ doc <- read_docx() %>%
 
 print(doc, target = OUTPUT_WORD)
 cat(sprintf("\nWord tables exported -> %s\n", basename(OUTPUT_WORD)))
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# FIGURAS EN CASTELLANO — p5c
+# Pegar al final del script. Requiere que todos los objetos anteriores
+# (scores, loadings_df, centroids12, centroids12t, var_pct, etc.) estén en memoria.
+# ══════════════════════════════════════════════════════════════════════════════
+
+GROUP_LABELS_ES <- c(
+  "Grows in both"           = "Dinamizadores",
+  "Reverses in B"           = "Reversores",
+  "Loses in B"              = "Pérdida en B",
+  "Structural depopulation" = "Despoblación estructural"
+)
+
+TYPOLOGY_LABELS_ES <- c(
+  "Rural - Remoto"    = "Rural-Remoto",
+  "Rural - Accesible" = "Rural-Accesible"
+)
+
+BLOCK_LABELS_ES <- c(
+  "Demographic"  = "Demografía",
+  "Economic"     = "Economía",
+  "Services"     = "Servicios",
+  "Housing"      = "Vivienda",
+  "Physical"     = "Medio físico",
+  "Environment"  = "Medioambiente"
+)
+
+VAR_LABELS_ES <- c(
+  "% Women"                = "% Mujeres",
+  "% 0-14"                 = "% 0-14",
+  "% 15-29"                = "% 15-29",
+  "% 30-64"                = "% 30-64",
+  "% 65+"                  = "% 65+",
+  "% Women 0-14"           = "% Mujeres 0-14",
+  "% Men 0-14"             = "% Hombres 0-14",
+  "% Women 15-29"          = "% Mujeres 15-29",
+  "% Men 15-29"            = "% Hombres 15-29",
+  "% Women 30-64"          = "% Mujeres 30-64",
+  "% Men 30-64"            = "% Hombres 30-64",
+  "% Women 65+"            = "% Mujeres 65+",
+  "% Men 65+"              = "% Hombres 65+",
+  "Mean age"               = "Edad media",
+  "Ageing index"           = "Índice de envejecimiento",
+  "Dependency rate"        = "Tasa de dependencia",
+  "% Foreign nationals"    = "% Población extranjera",
+  "Net income/person"      = "Renta neta/persona",
+  "Net income/household"   = "Renta neta/hogar",
+  "Gini index"             = "Índice de Gini",
+  "P80/P20"                = "P80/P20",
+  "Unemployment rate"      = "Tasa de paro",
+  "% Self-employed"        = "% Autónomos",
+  "% Permanent contracts"  = "% Contratos indefinidos",
+  "Total firms"            = "Total empresas",
+  "Mean pension"           = "Pensión media",
+  "% 100Mbps coverage"     = "% Cobertura 100Mbps",
+  "Primary care offices"   = "Consultorios atención primaria",
+  "Pharmacies"             = "Farmacias",
+  "Preschool centres"      = "Centros Ed. Infantil",
+  "Primary schools"        = "Colegios de Primaria",
+  "Time to 5k-town (min)"  = "Tiempo a mun. 5.000 hab. (min)",
+  "Time to 20k-town (min)" = "Tiempo a mun. 20.000 hab. (min)",
+  "Bank branches"          = "Sucursales bancarias",
+  "Vehicles/100 pop."      = "Vehículos/100 hab.",
+  "% Non-primary housing"  = "% Vivienda no principal",
+  "Household size"         = "Tamaño medio del hogar",
+  "% Single-person HH"     = "% Hogares unipersonales",
+  "Tourist beds/100 pop."  = "Plazas turísticas/100 hab.",
+  "Altitude (m)"           = "Altitud (m)",
+  "Density (hab/km2)"      = "Densidad (hab/km²)",
+  "Area (km2)"             = "Superficie (km²)",
+  "% Forest cover"         = "% Superficie forestal",
+  "% Protected area"       = "% Superficie protegida"
+)
+
+SOURCE_ES <- "Fuente: elaboración propia a partir del Padrón Municipal de Habitantes (INE, 1996–2025) y SIDAMUN (MITERD, 2023)."
+
+# Versión de load_arrows con etiquetas de variables en castellano
+load_arrows_es <- load_arrows %>%
+  mutate(short_label = recode(short_label, !!!VAR_LABELS_ES))
+
+
+# ── Fig 2 ES: Biplot CP1 × CP2 ───────────────────────────────────────────────
+p_biplot12_es <- ggplot() +
+  geom_point(data = scores_plot,
+             aes(x = PC1, y = PC2, colour = behavioural_group),
+             alpha = 0.3, size = 1.0) +
+  geom_point(data = centroids12,
+             aes(x = PC1, y = PC2, fill = behavioural_group),
+             shape = 23, size = 5, stroke = 0.8, colour = "white") +
+  geom_segment(data = load_arrows_es,
+               aes(x = 0, y = 0, xend = xend, yend = yend),
+               colour = load_arrows_es$arrow_colour,
+               arrow = arrow(length = unit(0.25, "cm"), type = "closed"),
+               linewidth = 0.8) +
+  geom_text_repel(data = load_arrows_es,
+                  aes(x = xend * 1.15, y = yend * 1.15, label = short_label),
+                  size = 3.8, max.overlaps = 50,
+                  force = 6, force_pull = 0.2,
+                  box.padding = 0.8, point.padding = 0.3,
+                  min.segment.length = 0,
+                  segment.size = 0.3, segment.colour = "#888888") +
+  geom_hline(yintercept = 0, linetype = "dashed", colour = "#bbbbbb", linewidth = 0.4) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "#bbbbbb", linewidth = 0.4) +
+  scale_colour_manual(values = GROUP_COLORS, breaks = GROUP_ORDER,
+                      labels = GROUP_LABELS_ES, name = "Grupo de comportamiento",
+                      guide = guide_legend(override.aes = list(size = 4, alpha = 1))) +
+  scale_fill_manual(values = GROUP_COLORS, breaks = GROUP_ORDER,
+                    labels = GROUP_LABELS_ES, name = "Grupo de comportamiento") +
+  labs(title    = "Biplot del ACP — CP1 × CP2",
+       subtitle = sprintf("Rural-Remoto + Rural-Accesible | n = %d | %d variables",
+                          nrow(scores), ncol(X_scaled)),
+       x        = sprintf("CP1 (%.1f%% de varianza)", var_pct[1]),
+       y        = sprintf("CP2 (%.1f%% de varianza)", var_pct[2]),
+       caption  = paste0("Los rombos indican las medianas de grupo. ",
+                         "Las flechas muestran las cargas con |carga| > 0,2.\n",
+                         SOURCE_ES)) +
+  theme_rurimescape() + theme(legend.position = "right")
+
+ggsave(file.path(FIG_DIR, "p5c_fig2_biplot_PC1_PC2_es.png"),
+       p_biplot12_es, width = 12, height = 9, dpi = 300)
+cat("Fig 2 ES guardada\n")
+
+
+# ── Fig 2b ES: Biplot por tipología ──────────────────────────────────────────
+p_biplot12_facet_es <- ggplot() +
+  geom_point(data = scores_plot,
+             aes(x = PC1, y = PC2, colour = behavioural_group),
+             alpha = 0.3, size = 0.9) +
+  geom_point(data = centroids12t,
+             aes(x = PC1, y = PC2, fill = behavioural_group),
+             shape = 23, size = 4.5, stroke = 0.7, colour = "white") +
+  geom_hline(yintercept = 0, linetype = "dashed", colour = "#bbbbbb", linewidth = 0.4) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "#bbbbbb", linewidth = 0.4) +
+  facet_wrap(~ tipo_goerlich,
+             labeller = labeller(tipo_goerlich = TYPOLOGY_LABELS_ES)) +
+  scale_colour_manual(values = GROUP_COLORS, breaks = GROUP_ORDER,
+                      labels = GROUP_LABELS_ES, name = "Grupo de comportamiento") +
+  scale_fill_manual(values   = GROUP_COLORS, breaks = GROUP_ORDER,
+                    labels   = GROUP_LABELS_ES, name = "Grupo de comportamiento") +
+  labs(title   = "Puntuaciones del ACP — CP1 × CP2 por tipología",
+       x       = sprintf("CP1 (%.1f%%)", var_pct[1]),
+       y       = sprintf("CP2 (%.1f%%)", var_pct[2]),
+       caption = paste0("Los rombos indican las medianas de grupo. ", SOURCE_ES)) +
+  theme_rurimescape() + theme(legend.position = "bottom")
+
+ggsave(file.path(FIG_DIR, "p5c_fig2b_biplot_PC1_PC2_by_typology_es.png"),
+       p_biplot12_facet_es, width = 12, height = 6, dpi = 300)
+cat("Fig 2b ES guardada\n")
+
+
+# ── Fig 4 ES: Mapa de calor de cargas ────────────────────────────────────────
+load_long_es <- loadings_df %>%
+  select(short_label, block, all_of(paste0("PC", 1:n_pcs_heat))) %>%
+  pivot_longer(cols = starts_with("PC"),
+               names_to  = "Componente",
+               values_to = "Carga") %>%
+  mutate(
+    short_label = factor(short_label, levels = rev(keep_labels)),
+    Componente  = factor(gsub("PC", "CP", Componente),
+                         levels = paste0("CP", 1:n_pcs_heat)),
+    block_es    = recode(block, !!!BLOCK_LABELS_ES)
+  )
+
+p_heatmap_es <- ggplot(load_long_es,
+                       aes(x = Componente, y = short_label, fill = Carga)) +
+  geom_tile(colour = "white", linewidth = 0.3) +
+  geom_text(aes(label = ifelse(abs(Carga) > 0.25,
+                               sprintf("%.2f", Carga), "")),
+            size = 3.8, colour = "black", fontface = "bold") +
+  scale_fill_gradient2(low = "#2c7bb6", mid = "white", high = "#d7191c",
+                       midpoint = 0, limits = c(-1, 1), name = "Carga") +
+  facet_grid(block_es ~ ., scales = "free_y", space = "free_y") +
+  labs(title    = "Mapa de calor de cargas del ACP (CP1–CP6)",
+       subtitle = "Valores mostrados donde |carga| > 0,25",
+       x        = "Componente principal",
+       y        = NULL,
+       caption  = SOURCE_ES) +
+  theme_rurimescape(base_size = 11) +
+  theme(axis.text.y   = element_text(size = 10),
+        strip.text.y  = element_text(angle = 0, size = 9, face = "bold"),
+        panel.spacing = unit(0.15, "lines"))
+
+ggsave(file.path(FIG_DIR, "p5c_fig4_loadings_heatmap_es.png"),
+       p_heatmap_es, width = 10, height = 13, dpi = 300)
+cat("Fig 4 ES guardada\n")
+
+
+# ── Fig 5 ES: Densidad de CP1 por grupo y tipología ──────────────────────────
+p_density_es <- ggplot(scores,
+                       aes(x = PC1, fill = behavioural_group,
+                           colour = behavioural_group)) +
+  geom_density(alpha = 0.35, linewidth = 0.7) +
+  geom_vline(data = medians_pc1,
+             aes(xintercept = med, colour = behavioural_group),
+             linetype = "dashed", linewidth = 0.8) +
+  facet_wrap(~ tipo_goerlich, ncol = 1,
+             labeller = labeller(tipo_goerlich = TYPOLOGY_LABELS_ES)) +
+  scale_fill_manual(values   = GROUP_COLORS, breaks = GROUP_ORDER,
+                    labels   = GROUP_LABELS_ES, name = "Grupo de comportamiento") +
+  scale_colour_manual(values = GROUP_COLORS, breaks = GROUP_ORDER,
+                      labels = GROUP_LABELS_ES, name = "Grupo de comportamiento") +
+  labs(title    = "Distribución de puntuaciones de CP1 por grupo de comportamiento",
+       subtitle = "Líneas discontinuas = medianas de grupo",
+       x        = sprintf("CP1 (%.1f%% de varianza)", var_pct[1]),
+       y        = "Densidad",
+       caption  = SOURCE_ES) +
+  theme_rurimescape()
+
+ggsave(file.path(FIG_DIR, "p5c_fig5_scores_density_PC1_es.png"),
+       p_density_es, width = 9, height = 8, dpi = 300)
+cat("Fig 5 ES guardada\n")
+
+cat("\n-- Figuras en castellano (p5c) guardadas en:", FIG_DIR, "--\n")
