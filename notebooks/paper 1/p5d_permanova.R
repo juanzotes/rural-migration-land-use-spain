@@ -127,7 +127,7 @@ print(table(scores_df$behavioural_group))
 
 
 # ── 4. Shared theme ────────────────────────────────────────────────────────────
-theme_rurimescape <- function(base_size = 14) {
+theme_rurimescape <- function(base_size = 16) {
   theme_minimal(base_size = base_size) +
     theme(
       text             = element_text(size = base_size),
@@ -137,7 +137,7 @@ theme_rurimescape <- function(base_size = 14) {
       legend.text      = element_text(size = base_size - 1),
       plot.title       = element_text(size = base_size + 1, face = "bold"),
       plot.subtitle    = element_text(size = base_size - 1, colour = "#555555"),
-      plot.caption     = element_text(size = 11, colour = "#555555", hjust = 0),
+      plot.caption     = element_text(size = 14, colour = "#555555", hjust = 0),
       panel.grid.minor = element_blank(),
       strip.text       = element_text(size = base_size, face = "bold")
     )

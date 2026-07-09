@@ -190,7 +190,7 @@ VAR_BLOCKS <- c(
 
 
 # ── 3. Shared theme (p5a aesthetic) ────────────────────────────────────────────
-theme_rurimescape <- function(base_size = 14) {
+theme_rurimescape <- function(base_size = 16) {
   theme_minimal(base_size = base_size) +
     theme(
       text             = element_text(size = base_size),
@@ -200,7 +200,7 @@ theme_rurimescape <- function(base_size = 14) {
       legend.text      = element_text(size = base_size - 1),
       plot.title       = element_text(size = base_size + 1, face = "bold"),
       plot.subtitle    = element_text(size = base_size - 1, colour = "#555555"),
-      plot.caption     = element_text(size = 12, colour = "#555555", hjust = 0),
+      plot.caption     = element_text(size = 14, colour = "#555555", hjust = 0),
       panel.grid.minor = element_blank(),
       strip.text       = element_text(size = base_size, face = "bold")
     )
@@ -427,7 +427,7 @@ p_biplot12 <- ggplot() +
                linewidth = 0.8) +
   geom_text_repel(data = load_arrows,
                   aes(x = xend * 1.15, y = yend * 1.15, label = short_label),
-                  size = 4.0, max.overlaps = 50,
+                  size = 5.0, max.overlaps = 50,
                   force = 6, force_pull = 0.2,
                   box.padding = 0.8, point.padding = 0.3,
                   min.segment.length = 0,
@@ -507,7 +507,7 @@ p_biplot13 <- ggplot() +
                linewidth = 0.8) +
   geom_text_repel(data = load_arrows3,
                   aes(x = xend * 1.15, y = yend * 1.15, label = short_label),
-                  size = 4.0, max.overlaps = 50,
+                  size = 5.0, max.overlaps = 50,
                   force = 6, force_pull = 0.2,
                   box.padding = 0.8, point.padding = 0.3,
                   min.segment.length = 0,
@@ -918,7 +918,7 @@ p_biplot12_es <- ggplot() +
                linewidth = 0.8) +
   geom_text_repel(data = load_arrows_es,
                   aes(x = xend * 1.15, y = yend * 1.15, label = short_label),
-                  size = 3.8, max.overlaps = 50,
+                  size = 5.0, max.overlaps = 50,
                   force = 6, force_pull = 0.2,
                   box.padding = 0.8, point.padding = 0.3,
                   min.segment.length = 0,
